@@ -1,9 +1,9 @@
 'use strict'
 
-import Images from '../../src/libs/image.js';
-import Sounds from '../../src/libs/sound.js';
-import Sprites from '../../src/libs/sprite.js';
-import Fonts from '../../src/libs/font.js';
+import Images from '../../../src/libs/image.js';
+import Sounds from '../../../src/libs/sound.js';
+import Sprites from '../../../src/libs/sprite.js';
+import Fonts from '../../../src/libs/font.js';
 import Scene1 from './scene1.js';
 
 
