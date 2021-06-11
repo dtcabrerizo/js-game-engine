@@ -1,5 +1,6 @@
 'use strict'
 
+import Fonts from "../../../src/libs/font.js";
 import Images from "../../../src/libs/image.js";
 import Sounds from "../../../src/libs/sound.js";
 import Sprites from "../../../src/libs/sprite.js";
@@ -55,7 +56,7 @@ const Scene1 = {
         }
         
         // Display the current calculated FPS on the top right corner
-        game.ctx.font = '20px "Press Start 2P"';
+        game.ctx.font = Fonts.P2.size(20);
         game.ctx.textAlign = 'right';
         game.ctx.textBaseline = 'top';
         game.ctx.fillText(`FPS: ${this.fps.toFixed(2)}`, game.canvas.width, 15);

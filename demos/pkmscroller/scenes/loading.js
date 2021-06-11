@@ -41,7 +41,7 @@ const SceneLoading = {
       Sprites.load('arrows', './images/arrow.png', arrows),
       Images.load('back', './images/back.png'),
       Sounds.load('pkm', './sounds/music.mp3', true, 0.5),
-      Fonts.load('P2', 'https://fonts.googleapis.com/css?family=Press+Start+2P')
+      Fonts.load('P2', 'Press Start 2P', 'https://fonts.googleapis.com/css?family=Press+Start+2P')
     ];
 
     // Increments the progress counter for each promise that finishes
@@ -56,7 +56,7 @@ const SceneLoading = {
   draw(game, delta) {
     // Draw the scene
 
-    game.ctx.font = '40px "Press Start 2P"';
+    game.ctx.font = Fonts.P2.size(40);
     game.ctx.textAlign = 'center';
     game.ctx.textBaseline = 'middle';
 
