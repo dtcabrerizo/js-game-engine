@@ -41,7 +41,7 @@ const SceneLoading = {
       Sprites.load('arrows', './images/arrow.png', arrows),
       Images.load('back', './images/back.png'),
       Sounds.load('pkm', './sounds/music.mp3', true, 0.5),
-      Fonts.load('P2', 'http://fonts.googleapis.com/css?family=Press+Start+2P')
+      Fonts.load('P2', 'https://fonts.googleapis.com/css?family=Press+Start+2P')
     ];
 
     // Increments the progress counter for each promise that finishes
