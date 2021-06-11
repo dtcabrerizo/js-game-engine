@@ -1,5 +1,13 @@
 'use strict'
 
+import Fonts from "./font.js";
+import Scripts from "./script.js";
+import Sprites from "./sprite.js";
+import Images from "./image.js";
+import Sounds from "./sound.js";
+import Rect from "./rect.js";
+import { Client, Server} from './network.js';
+
 /**
  * Main game class
  */
@@ -80,3 +88,6 @@ export default class Game {
     return this.currentScene?.[event] && this.currentScene?.[event](this, e);
   }
 }
+
+
+export { Game, Scripts, Fonts, Sprites, Images, Sounds, Rect, Client, Server };

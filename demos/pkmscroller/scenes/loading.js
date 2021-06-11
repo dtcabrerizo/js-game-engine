@@ -1,12 +1,9 @@
 'use strict'
 
-import Images from '../../../src/libs/image.js';
-import Sounds from '../../../src/libs/sound.js';
-import Sprites from '../../../src/libs/sprite.js';
-import Fonts from '../../../src/libs/font.js';
+import { Sounds, Images, Sprites, Fonts } from '../../../src/game.js';
 import Scene1 from './scene1.js';
 
-
+Sounds
 // Define the loading scene
 const SceneLoading = {
   id: 'SceneLoading',
@@ -55,20 +52,17 @@ const SceneLoading = {
   },
   draw(game, delta) {
     // Draw the scene
-
-    game.ctx.font = Fonts.P2.size(40);
-    game.ctx.textAlign = 'center';
-    game.ctx.textBaseline = 'middle';
+    Fonts.P2.config(game.ctx, { size: 40, align: 'center', baseline: 'middle' });
 
     // If it still loading the resources display the progress bar
     if (this.progress < 100) {
       game.ctx.fillStyle = 'rgb(128,0,0)';
       game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-
+           
       game.ctx.fillStyle = 'rgb(255,255,255)';
       game.ctx.strokeStyle = 'rgb(255,255,255)';
       game.ctx.lineWidth = 4;
-      game.ctx.fillText('Loading...', game.canvas.width / 2, game.canvas.height / 2 - 50);
+      Fonts.P2.draw(game.ctx, 'Loading...', game.canvas.width / 2, game.canvas.height / 2 - 50, { color: 'rgb(255,255,255)', size: 40, align: 'center', baseline: 'middle' });
 
       game.ctx.strokeRect(20, game.canvas.height / 2 + 50, game.canvas.width - 40, 20)
       game.ctx.fillRect(20, game.canvas.height / 2 + 50, (game.canvas.width - 40) * this.progress / 100, 20)
@@ -77,8 +71,7 @@ const SceneLoading = {
       // This is important so the canvas have the focus and can receive keyboar inputs and we can start playing audio since the user already interacted with the page
       game.ctx.fillStyle = 'rgb(51,51,51)';
       game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-      game.ctx.fillStyle = 'rgb(255,255,255)';
-      game.ctx.fillText('Click to start', game.canvas.width / 2, game.canvas.height / 2);
+      Fonts.P2.draw(game.ctx, 'Click to start', game.canvas.width / 2, game.canvas.height / 2, { color: 'rgb(255,255,255)' });
     }
 
   },

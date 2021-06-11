@@ -31,6 +31,7 @@ export class CustomFont {
      * @returns {String} Font size and name formatted
      */
     size(value) {
+        if (!value) return this.toString();
         if (!Number.isNaN(value)) value = `${value}px`;
         return `${value} "${this.name}"`;
     }
@@ -41,6 +42,44 @@ export class CustomFont {
      */
     toString() {
         return `"${this.name}"`;
+    }
+
+    /**
+     * Configs the context top use the font with the deined alignment
+     * @param {CanvasRenderingContext2D} ctx The canvas to be configured
+     * @param {object} config The canvas to be configured
+     * @param {String} config.color Color, gradient, or pattern to use on the fillStyle property
+     * @param {Number|String} config.size Size in pixes or the value to be used with the font on the cnavas context
+     * @param {('left'|'right'|'center'|'start'|'end')} config.align Default text horizonatl alignment  
+     * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} config.baseline Default text baseline alignment  
+     * @returns 
+     */
+    config(ctx, { color, size, align, baseline } = {}) {
+        ctx.font = this.size(size);
+        
+        if (color) ctx.fillStyle = color;
+        if (align) ctx.textAlign = align;
+        if (baseline) ctx.textBaseline = baseline;        
+        return ctx;
+    }
+
+    /**
+     * Non-desrtuctive draws text on canvas using the config
+     * @param {CanvasRenderingContext2D} ctx The canvas to be configured
+     * @param {String} text Text to be drawn
+     * @param {object} config The canvas to be configured
+     * @param {String} config.color Color, gradient, or pattern to use on the fillStyle property
+     * @param {Number|String} config.size Size in pixes or the value to be used with the font on the cnavas context
+     * @param {('left'|'right'|'center'|'start'|'end')} config.align Default text horizonatl alignment  
+     * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} config.baseline Default text baseline alignment  
+     * @returns 
+     */
+     draw(ctx, text, x, y, config) {
+        ctx.save();
+        this.config(ctx, config)
+        ctx.fillText(text, x, y);
+        ctx.restore();
+        return ctx;
     }
 }
 
