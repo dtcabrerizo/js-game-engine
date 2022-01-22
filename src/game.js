@@ -52,7 +52,7 @@ export default class Game {
    */
   set scene(scene) {
     // Display a message that the scene is changing
-    console.debug('Chnaging Scene: ', scene);
+    console.debug('Changing Scene: ', scene);
 
     // If the current scene has a destroy function invoke it before changin scene
     if (typeof (this.currentScene?.destroy) == 'function') this.currentScene.destroy(this);
