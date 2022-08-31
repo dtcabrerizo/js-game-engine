@@ -67,7 +67,7 @@ export class Client extends NetorkController {
     }
     onData(data) {
         console.debug('Client received', data);
-        if (this.handleData && typeof (this.handleData) == 'function') this.handleData(JSON.parse(data));
+        if (this.handleData && typeof (this.handleData) == 'function') this.handleData(typeof data == 'object' ? data : JSON.parse(data));
     }
     send(data) {
         if (this.conn == null) return;
