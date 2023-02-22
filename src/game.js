@@ -6,14 +6,14 @@ import Sprites from "./sprite.js";
 import Images from "./image.js";
 import Sounds from "./sound.js";
 import Rect from "./rect.js";
-import { Client, Server} from './network.js';
+import { Client, Server } from './network.js';
 
 /**
  * Main game class
  */
 export default class Game {
   constructor(initialScene, width, height, parent = document.body) {
-    
+
     // Create the canvas object
     this.canvas = document.createElement('canvas');
     this.canvas.width = width;
@@ -21,10 +21,10 @@ export default class Game {
     this.canvas.setAttribute('tabindex', 0);
 
     // Add handlers for the most common events
-    ['mouseMove', 'mouseDown', 'mouseUp', 'mouseEnter', 'mouseLeave', 'click', 'keyUp', 'keyDown', 'keyPress'].forEach(event => {
+    ['mouseMove', 'mouseDown', 'mouseUp', 'mouseEnter', 'mouseLeave', 'click', 'keyUp', 'keyDown', 'keyPress', 'touchStart', 'touchMove', 'touchEnd'].forEach(event => {
       this.canvas.addEventListener(event.toLowerCase(), this.event.bind(this, event, false));
     });
-    
+
     // Ad handler for the mouse right clivk and bind it as a "click" event
     this.canvas.addEventListener('contextmenu', this.event.bind(this, 'click', true));
 
@@ -80,7 +80,7 @@ export default class Game {
     window.requestAnimationFrame(this.loop.bind(this, performance.now()));
   }
 
-  event(event, preventDefault, e ) {
+  event(event, preventDefault, e) {
     // If the event handler don't want to execute the default behavior we should cancel it
     // It would be used mostly for the "contextmenu" event so it won't display the menu
     if (preventDefault) e.preventDefault();
