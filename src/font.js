@@ -54,12 +54,13 @@ export class CustomFont {
      * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} config.baseline Default text baseline alignment  
      * @returns 
      */
-    config(ctx, { color, size, align, baseline } = {}) {
+    config(ctx, { color, size, align, baseline, letterSpacing } = {}) {
         ctx.font = this.size(size);
         
         if (color) ctx.fillStyle = color;
         if (align) ctx.textAlign = align;
         if (baseline) ctx.textBaseline = baseline;        
+        if (letterSpacing) ctx.letterSpacing = letterSpacing;
         return ctx;
     }
 
@@ -80,6 +81,25 @@ export class CustomFont {
         ctx.fillText(text, x, y);
         ctx.restore();
         return ctx;
+    }
+
+    /**
+     * Non-destructive measures text on canvas using the config
+     * @param {CanvasRenderingContext2D} ctx The canvas to be configured
+     * @param {String} text Text to be measured
+     * @param {object} config The canvas to be configured
+     * @param {String} config.color Color, gradient, or pattern to use on the fillStyle property
+     * @param {Number|String} config.size Size in pixes or the value to be used with the font on the cnavas context
+     * @param {('left'|'right'|'center'|'start'|'end')} config.align Default text horizonatl alignment  
+     * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} config.baseline Default text baseline alignment  
+     * @returns {TextMetrics}
+     */
+    measureText(ctx, text, config) {
+        ctx.save();
+        this.config(ctx, config);
+        const ret = ctx.measureText(text);
+        ctx.restore();
+        return ret;
     }
 }
 

@@ -26,7 +26,9 @@ export class Sound {
      * @returns {Sound} Copy of the sound class
      */
     clone() {
-        return new Sound(this.audio, this.loop);
+        const tmpAudio = new Audio(this.audio.src, this.audio.loop);
+        tmpAudio.volume = this.audio.volume;
+        return new Sound(tmpAudio, this.loop);
     }
     /**
      * Plays the sound
@@ -52,6 +54,10 @@ export class Sound {
         // Pause the playback
         this.audio.pause();
     };
+
+    isPlaying() {
+        return  !this.audio.paused && !this.audio.ended && this.audio.readyState > 2;
+    }
 }
 
 /**
