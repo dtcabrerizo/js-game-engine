@@ -12,6 +12,9 @@ import { Client, Server } from './network.js';
  * Main game class
  */
 export default class Game {
+
+  overrideEvents = {};
+
   constructor(initialScene, width, height, parent = document.body) {
 
     // Create the canvas object
@@ -84,6 +87,13 @@ export default class Game {
     // If the event handler don't want to execute the default behavior we should cancel it
     // It would be used mostly for the "contextmenu" event so it won't display the menu
     if (preventDefault) e.preventDefault();
+
+    // If the current scene has a handler for this event invoke the handler
+    if (this.overrideEvents[event]) {
+      // If the event handler returns false we should consider the event handled
+      if (this.overrideEvents[event](this, e) === false) return;
+    }
+
     // If the current scene has a handler for this event invoke the handler
     return this.currentScene?.[event] && this.currentScene?.[event](this, e);
   }
