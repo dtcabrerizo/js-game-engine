@@ -21,7 +21,7 @@ export default class Game {
     this.canvas.setAttribute('tabindex', 0);
 
     // Add handlers for the most common events
-    ['mouseMove', 'mouseDown', 'mouseUp', 'mouseEnter', 'mouseLeave', 'click', 'keyUp', 'keyDown', 'keyPress', 'touchStart', 'touchMove', 'touchEnd'].forEach(event => {
+    ['mouseMove', 'mouseDown', 'mouseUp', 'mouseEnter', 'mouseLeave', 'click', 'keyUp', 'keyDown', 'keyPress', 'touchStart', 'touchMove', 'touchEnd', 'wheel'].forEach(event => {
       this.canvas.addEventListener(event.toLowerCase(), this.event.bind(this, event, false));
     });
 
