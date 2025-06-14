@@ -45,15 +45,20 @@ export class Sprite {
     if (!sprite) throw new Error(`Sprite ${spriteId} not found`);
     ctx.save();
     ctx.globalAlpha = opacity;
-    ctx.translate(x + sprite.w / 2 * scale[0], y + sprite.h / 2 * scale[1]);
+
+    const translateX = x - sprite.w / 2 * scale[0];
+    const translateY = y + sprite.h / 2 * scale[1];
+    
+    ctx.translate(translateX, translateY);
     ctx.rotate(rotation);
-    ctx.translate(-x - sprite.w / 2 * scale[0], -y - sprite.h / 2 * scale[1]);
+    ctx.translate(-translateX, -translateY);
 
-    const dx = scale[0] >= 0 ? x : (x - sprite.w) * scale[0];
-    const dy = scale[1] >= 0 ? y : (-y - sprite.h) * scale[1];
+    const dx = x * Math.sign(scale[0]);
+    const dy = y * Math.sign(scale[1]);
 
+    ctx.scale(Math.sign(scale[0]), Math.sign(scale[1]));
     ctx.drawImage(this.img, sprite.x, sprite.y, sprite.w, sprite.h, dx, dy, sprite.w * scale[0], sprite.h * scale[1]);
-    ctx.scale(scale[0], scale[1]);
+    ctx.scale(1, 1);
     ctx.restore();
     return ctx;
   }
