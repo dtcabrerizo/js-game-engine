@@ -56,10 +56,10 @@ export class CustomFont {
      */
     config(ctx, { color, size, align, baseline, letterSpacing } = {}) {
         ctx.font = this.size(size);
-        
+
         if (color) ctx.fillStyle = color;
         if (align) ctx.textAlign = align;
-        if (baseline) ctx.textBaseline = baseline;        
+        if (baseline) ctx.textBaseline = baseline;
         if (letterSpacing) ctx.letterSpacing = letterSpacing;
         return ctx;
     }
@@ -75,7 +75,7 @@ export class CustomFont {
      * @param {('top'|'hanging'|'middle'|'alphabetic'|'ideographic'|'bottom')} config.baseline Default text baseline alignment  
      * @returns 
      */
-     draw(ctx, text, x, y, config) {
+    draw(ctx, text, x, y, config) {
         ctx.save();
         this.config(ctx, config)
         ctx.fillText(text, x, y);
@@ -113,14 +113,24 @@ export default class Fonts {
      * @param {String} id Font identifier
      * @param {String} name Font identifier
      * @param {String} url Font path
-     * @returns {Promise} Font loaded
+     * @returns {Promise[CustomFont]} Font loaded
      */
     static load(id, name, url) {
-        if (['length', 'prototype', 'load'].indexOf(id) >= 0) throw new Error(`The name "${id}" is not allowed for a font`);
-        if (Fonts[id]) return resolve();
-
-        Fonts[id] = new CustomFont(name);
+        Fonts.add(id, name);
         return Fonts[id].load(url);
 
+    }
+
+    /**
+     * Adds a Font to the Fonts class as a property
+     * @param {String} id Font identifier
+     * @param {String} name Font identifier
+     * @returns {Promise[CustomFont]} Font loaded
+     */
+    static add(id, name) {
+        if (['length', 'prototype', 'load'].indexOf(id) >= 0) throw new Error(`The name "${id}" is not allowed for a font`);
+        if (Fonts[id]) return resolve();
+        Fonts[id] = new CustomFont(name);
+        return Fonts[id]
     }
 }
